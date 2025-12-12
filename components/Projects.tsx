@@ -3,6 +3,9 @@
 import { useEffect, useRef } from 'react'
 import data from '@/lib/data'
 
+// 从配置中获取basePath，用于处理项目链接
+const basePath = '/successplz'
+
 export default function Projects() {
   const projectsRef = useRef<HTMLElement>(null)
 
@@ -80,7 +83,7 @@ export default function Projects() {
                 
                 <div className="flex gap-3">
                   <a
-                    href={project.link}
+                    href={project.link.startsWith('http') ? project.link : `${basePath}${project.link}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transform hover:scale-105 transition-all duration-300 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
