@@ -3,6 +3,9 @@
 import { useEffect, useRef, useState } from 'react'
 import data from '@/lib/data'
 
+// 从配置中获取basePath，用于处理图片路径
+const basePath = '/successplz'
+
 export default function Photography() {
   const photographyRef = useRef<HTMLElement>(null)
   const [selectedModule, setSelectedModule] = useState<number | null>(null)
@@ -105,15 +108,15 @@ export default function Photography() {
                         onDoubleClick={() => openImageViewer(work.image, work.title)}
                       >
                         <img 
-                          src={work.image} 
-                          alt={work.title} 
-                          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement
-                            target.src = 'https://via.placeholder.com/400x300?text=摄影作品'
-                            target.alt = '摄影作品占位图'
-                          }}
-                        />
+          src={basePath + work.image} 
+          alt={work.title} 
+          className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+          onError={(e) => {
+            const target = e.target as HTMLImageElement
+            target.src = 'https://via.placeholder.com/400x300?text=摄影作品'
+            target.alt = '摄影作品占位图'
+          }}
+        />
                       </div>
                       <div className="p-4">
                         <h4 className="text-lg font-semibold text-gray-900 mb-1">{work.title}</h4>
@@ -158,7 +161,7 @@ export default function Photography() {
               </svg>
             </button>
             <img 
-              src={selectedImage.src} 
+              src={basePath + selectedImage.src} 
               alt={selectedImage.title} 
               className="max-w-full max-h-[90vh] object-contain rounded-lg"
               onClick={(e) => e.stopPropagation()}
